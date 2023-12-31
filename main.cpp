@@ -19,6 +19,9 @@ auto main() -> int
     std::vector<sf::RectangleShape> targets{};
 
     int score = 0;
+    int amount_killed = 0;
+    bool isDone = false;
+
 
     for(int y = 100; y < 300; y += 50)
     {
@@ -90,8 +93,18 @@ auto main() -> int
                 ball_velocity.y = -ball_velocity.y;
                 targets[i].setPosition(-100, -100);
                 score += 1;
+                amount_killed += 1;
                 std::cout << "Score: " << score << "\n";
             }
+        }
+
+        if (amount_killed >= 48 && !isDone)
+        {
+            isDone = true;
+        }
+        if (isDone)
+        {
+            paddle.setPosition(ball.getPosition().x, paddle.getPosition().y);
         }
 
         window.clear();
