@@ -4,6 +4,10 @@
 
 auto main() -> int
 {
+    /*
+    std::vector<sf::CircleShape> circles{};
+    */
+
     sf::RenderWindow window(sf::VideoMode(1000, 700), "Bouncing Balls SFML App");
     window.setFramerateLimit(60);
 
@@ -105,14 +109,27 @@ auto main() -> int
             paddle.setPosition(ball.getPosition().x, paddle.getPosition().y);
         }
 
+        /*
+        sf::CircleShape copy_circle = ball;
+        copy_circle.setFillColor(sf::Color(sf::Uint8(100), sf::Uint8(100), sf::Uint8(100)));
+        circles.push_back(copy_circle);
+        */
+
         window.clear();
         window.draw(paddle);
-        window.draw(ball);
 
         for (const auto& i : targets)
         {
             window.draw(i);
         }
+
+        /*
+        for (const auto& x : circles)
+        {
+            window.draw(x);
+        }
+        */
+        window.draw(ball);
         window.display();
     }
     return 0;
