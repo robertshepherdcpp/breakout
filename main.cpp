@@ -23,7 +23,7 @@ auto main() -> int
     bool isDone = false;
 
 
-    for(int y = 100; y < 300; y += 50)
+    for (int y = 100; y < 300; y += 50)
     {
         for (int x = 200; x < 800; x += 50)
         {
@@ -44,30 +44,28 @@ auto main() -> int
                 if (event.key.code == sf::Keyboard::A)
                 {
                     if (paddle.getPosition().x > 0)
-                    {
+
                         for (int i = 0; i < 30; i++)
                         {
                             paddle.move(sf::Vector2f(-1, 0));
                         }
-                    }
                 }
-                if (event.key.code == sf::Keyboard::D)
+            }
+            if (event.key.code == sf::Keyboard::D)
+            {
+                if (paddle.getPosition().x < (1000 - paddle.getGlobalBounds().width))
                 {
-                    if (paddle.getPosition().y < (1000 - paddle.getGlobalBounds().width))
+                    for (int i = 0; i < 30; i++)
                     {
-                        for (int i = 0; i < 30; i++)
-                        {
-                            paddle.move(sf::Vector2f(1, 0));
-                        }
+                        paddle.move(sf::Vector2f(1, 0));
                     }
                 }
             }
-
         }
 
         ball.move(ball_velocity);
 
-        if (ball.getPosition().x < 0 || ball.getPosition().x > (1000 - ball.getGlobalBounds().width))
+        if (ball.getPosition().x < 0 || ball.getPosition().x >(1000 - ball.getGlobalBounds().width))
         {
             ball_velocity.x = -ball_velocity.x;
         }
@@ -110,6 +108,7 @@ auto main() -> int
         window.clear();
         window.draw(paddle);
         window.draw(ball);
+
         for (const auto& i : targets)
         {
             window.draw(i);
