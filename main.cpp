@@ -25,6 +25,7 @@ auto main() -> int
     int score = 0;
     int amount_killed = 0;
     bool isDone = false;
+    bool has_reset = false;
 
 
     for (int y = 100; y < 300; y += 50)
@@ -107,6 +108,22 @@ auto main() -> int
         if (isDone)
         {
             paddle.setPosition(ball.getPosition().x, paddle.getPosition().y);
+            if (!has_reset)
+            {
+                std::vector<sf::RectangleShape> new_targets{};
+                for (int y = 100; y < 300; y += 50)
+                {
+                    for (int x = 200; x < 800; x += 50)
+                    {
+                        auto copy_sprite = target;
+                        copy_sprite.setPosition(sf::Vector2f(float(x), float(y)));
+                        new_targets.push_back(copy_sprite);
+                    }
+                }
+                has_reset = true;
+                targets = new_targets;
+            }
+
         }
 
         /*
